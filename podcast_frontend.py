@@ -3,14 +3,6 @@ import modal
 import json
 import os
 
-# Set the theme to dark
-st.set_page_config(
-    page_title="Podcastatron",
-    layout="wide",
-    initial_sidebar_state="expanded",
-    theme="dark"
-)
-
 def main():
     st.title("Podcastatron")
 
