@@ -58,15 +58,14 @@ def main():
                 f"<p style='margin-bottom: 5px;'>{moment}</p>", unsafe_allow_html=True)
 
     # User Input box
-    with st.beta_expander("Add and Process New Podcast Feed", expanded=True):
-      #st.sidebar.subheader("Add and Process New Podcast Feed")
+    st.sidebar.subheader("Add and Process New Podcast Feed")
+    with st.beta_expander("Click to expand and add a new podcast RSS"):
       url = st.sidebar.text_input("Link to RSS Feed")
-
       process_button = st.sidebar.button("Process Podcast Feed")
-      st.sidebar.markdown("**Note**: Podcast processing can take upto 5 mins, please be patient.")
+      #st.sidebar.markdown("**Note**: Podcast processing can take upto 5 mins, please be patient.")
 
       if process_button:
-        with st.spinner(f"Fetching {url}. This can take up to 5 minutes..."):
+        with st.sidebar.spinner(f"Fetching {url}. This can take up to 5 minutes..."):
           process_podcast_info(url)
 
 def create_dict_from_json_files(folder_path):
