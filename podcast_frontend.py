@@ -64,8 +64,9 @@ def main():
     process_button = st.sidebar.button("Process Podcast Feed")
     st.sidebar.markdown("**Note**: Podcast processing can take upto 5 mins, please be patient.")
 
-    if process_button:
-        pass
+    if url and process_button:
+        with st.spinner(f"Fetching {url}. This can take up to 5 minutes..."):
+          process_podcast_info(url)
 
 def create_dict_from_json_files(folder_path):
     json_files = [f for f in os.listdir(folder_path) if f.endswith('.json')]
@@ -84,7 +85,15 @@ def create_dict_from_json_files(folder_path):
 def process_podcast_info(url):
     f = modal.Function.lookup("corise-podcast-project", "process_podcast")
     output = f.call(url, '/content/podcast/')
-    return output
+
+    if output:
+      num_podcasts = len(create_dict_from_json_files('.'))
+      filename = "./podcast-%i.json" % (num_podcasts+1)
+      with open(filename, "w") as outfile:
+        json.dump(output, outfile)
+      return True
+    else:
+      return False
 
 if __name__ == '__main__':
     main()
