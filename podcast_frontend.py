@@ -3,6 +3,14 @@ import modal
 import json
 import os
 
+# Set the theme to dark
+st.set_page_config(
+    page_title="Podcastatron",
+    layout="wide",
+    initial_sidebar_state="expanded",
+    theme="dark"
+)
+
 def main():
     st.title("Podcastatron")
 
@@ -39,7 +47,7 @@ def main():
         # Display the podcast guest and their details in a side-by-side layout
         st.subheader("Guest")
         col3, col4 = st.columns([3, 7])
-        
+
         with col3:
             if podcast_info['podcast_guest'][6] != '':
               st.image(podcast_info['podcast_guest'][6], caption=podcast_info['podcast_guest'][0], width=300, use_column_width=True)
@@ -58,13 +66,14 @@ def main():
                 f"<p style='margin-bottom: 5px;'>{moment}</p>", unsafe_allow_html=True)
 
     # User Input box
-    st.sidebar.subheader("Add and Process New Podcast Feed")
-    url = st.sidebar.text_input("Link to RSS Feed")
+    with st.beta_expander("Add and Process New Podcast Feed", expanded=True):
+      #st.sidebar.subheader("Add and Process New Podcast Feed")
+      url = st.sidebar.text_input("Link to RSS Feed")
 
-    process_button = st.sidebar.button("Process Podcast Feed")
-    st.sidebar.markdown("**Note**: Podcast processing can take upto 5 mins, please be patient.")
+      process_button = st.sidebar.button("Process Podcast Feed")
+      st.sidebar.markdown("**Note**: Podcast processing can take upto 5 mins, please be patient.")
 
-    if url and process_button:
+      if process_button:
         with st.spinner(f"Fetching {url}. This can take up to 5 minutes..."):
           process_podcast_info(url)
 
