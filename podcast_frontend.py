@@ -14,16 +14,15 @@ def load_sidebar():
     load_podcast_info(available_podcasts[selected_podcast])
     load_chatbot(available_podcasts[selected_podcast])
   
-  #st.sidebar.subheader("Add New Podcast url")
-  with st.sidebar.expander("Add New Podcast url", expanded=False):
-    url = st.text_input("RSS Feed:")
-    process_button = st.button(":heavy_check_mark: Add RSS Feed")
+  with st.sidebar.expander("Add New Podcast URL", expanded=False):
+    url = st.text_input("RSS URL:")
+    process_button = st.button(":heavy_check_mark: Process URL")
     if process_button:
-         with st.spinner("Processing RSS url. This may take up to 5 minutes..."):
+         with st.spinner("Processing RSS URL. This may take up to 5 minutes..."):
           if process_podcast_info(url):
-            st.success("Successfully processed RSS url")
+            st.success("Successfully processed RSS URL")
           else:
-            st.error("Error processing RSS url")
+            st.error("Error processing RSS URL")
 
 def load_podcast_info(podcast_info):
   # Load Episide Title / Image / Summary
