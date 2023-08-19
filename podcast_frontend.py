@@ -62,7 +62,7 @@ def load_chatbot(podcast_info):
 
   # Set a default model
   if "openai_model" not in st.session_state:
-    st.session_state["openai_model"] = "gpt-3.5-turbo-16k"
+    st.session_state["openai_model"] = "gpt-3.5-turbo"
   
   # Initialize chat
   if "guest" not in st.session_state:
@@ -82,7 +82,7 @@ def load_chatbot(podcast_info):
   # Initialize messages
   st.session_state["guest"] = podcast_info['podcast_guest'][0]
   if len(st.session_state.messages) == 0:
-    instruction = "You are person named %s, you should answer every question as if you are %s. Your responses should be as natural as possible and feel like a chat with a friend, with great excitement. Here is what we know about you from wikipedia: %s. If we know nothing you should derive as much information from third party sources. You were a guest a podcast with the following transcript, try to direct questions relating to the following podcast transcript: %s" % (podcast_info['podcast_guest'][0], podcast_info['podcast_guest'][0], podcast_info["podcast_guest"][4], podcast_info['podcast_details']['episode_transcript'])
+    instruction = "You are person named %s, you should answer every question as if you are %s. Your responses should be as natural as possible and feel like a chat with a friend, with great excitement. Here is what we know about you from wikipedia: %s. If we know nothing you should derive as much information from third party sources. You were a guest a podcast with the following highlights, try to direct questions relating to the following podcast highlights: %s" % (podcast_info['podcast_guest'][0], podcast_info['podcast_guest'][0], podcast_info["podcast_guest"][4], podcast_info['podcast_highlights'])
     st.session_state.messages.append({"role": "user", "content": instruction})
     st.session_state.messages.append({"role": "assistant", "content": "Absolutely"})
 
